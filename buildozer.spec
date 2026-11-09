@@ -18,5 +18,8 @@ android.ndk = 25b
 android.accept_sdk_license = True
 android.archs = arm64-v8a
 
+# Forzar rama estable para evitar errores de recetas antiguas
+p4a.branch = master
+
 [buildozer]
 log_level = 2
