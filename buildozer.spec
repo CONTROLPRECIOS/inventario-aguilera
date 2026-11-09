@@ -1,21 +1,34 @@
-[app]
+name: Build Android APK
 
-title = Inventario Aguilera
-package.name = inventarioaguilera
-package.domain = org.aguilera
-source.dir = .
-source.include_exts = py,png,jpg,kv,atlas
-version = 1.0
-requirements = python3,kivy
-orientation = portrait
-osx.python_version = 3
-osx.kivy_version = 1.9.1
-fullscreen = 0
-android.permissions = INTERNET
+on:
+  push:
+    branches: [ main ]
 
-# Configuración esencial para Android
-android.api = 31
-android.minapi = 21
-android.sdk = 30
-android.ndk = 23b
-android.accept_sdk_license = True
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libffi-dev libssl-dev
+        pip install --upgrade pip
+        pip install buildozer cython==0.29.36
+
+    - name: Build with Buildozer
+      run: |
+        buildozer -v android debug
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: package
+        path: bin/*.apk
