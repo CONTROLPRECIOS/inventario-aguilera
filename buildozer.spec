@@ -17,8 +17,8 @@ android.sdk = 30
 android.ndk = 25b
 android.accept_sdk_license = True
 
-# Soportar ambas arquitecturas para evitar fallos de compilación nativa
-android.archs = armeabi-v7a, arm64-v8a
+# Usar una sola arquitectura para garantizar una compilación exitosa
+android.archs = arm64-v8a
 
 p4a.branch = master
 
