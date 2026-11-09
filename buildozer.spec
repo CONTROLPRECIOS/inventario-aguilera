@@ -16,9 +16,10 @@ android.minapi = 21
 android.sdk = 30
 android.ndk = 25b
 android.accept_sdk_license = True
-android.archs = arm64-v8a
 
-# Forzar rama estable para evitar errores de recetas antiguas
+# Soportar ambas arquitecturas para evitar fallos de compilación nativa
+android.archs = armeabi-v7a, arm64-v8a
+
 p4a.branch = master
 
 [buildozer]
