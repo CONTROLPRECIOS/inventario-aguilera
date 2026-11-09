@@ -24,6 +24,10 @@ jobs:
         python -m pip install --upgrade setuptools wheel
         python -m pip install cython==0.29.33 buildozer
 
+    - name: Clean previous builds
+      run: |
+        rm -rf .buildozer bin
+
     - name: Build with Buildozer
       run: |
         python -m buildozer -v android debug
