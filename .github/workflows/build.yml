@@ -24,9 +24,10 @@ jobs:
         python -m pip install --upgrade setuptools wheel
         python -m pip install cython==0.29.33 buildozer
 
-    - name: Clean previous builds and cache
+    - name: Clean environment and previous cache
       run: |
         rm -rf ~/.buildozer bin .buildozer
+        sudo rm -rf /usr/local/include/python3.14* /usr/lib/python3.14
 
     - name: Build with Buildozer
       run: |
