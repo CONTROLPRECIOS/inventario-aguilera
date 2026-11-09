@@ -20,12 +20,12 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libffi-dev libssl-dev build-essential ccache libltdl-dev
-        pip install --upgrade pip
-        pip install buildozer cython==0.29.36
+        python -m pip install --upgrade pip
+        python -m pip install buildozer cython==0.29.36
 
     - name: Build with Buildozer
       run: |
-        buildozer -v android debug
+        python -m buildozer -v android debug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
