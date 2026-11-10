@@ -30,8 +30,6 @@ jobs:
 
     - name: Build with Buildozer
       run: |
-        export CFLAGS="-I$(python -c 'import sys; print(sys.exec_prefix)')/include/python3.10"
-        export LDFLAGS="-L$(python -c 'import sys; print(sys.exec_prefix)')/lib"
         python -m buildozer -v android debug
 
     - name: Upload APK
