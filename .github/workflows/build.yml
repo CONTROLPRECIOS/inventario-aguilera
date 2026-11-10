@@ -24,13 +24,14 @@ jobs:
         python -m pip install --upgrade setuptools wheel
         python -m pip install cython==0.29.33 buildozer
 
-    - name: Clean everything
+    - name: Clean previous builds
       run: |
         rm -rf ~/.buildozer bin .buildozer
 
     - name: Build with Buildozer
       run: |
-        export PYTHON_CONFIGURE_WITH_DEbug=no
+        export CFLAGS="-I$(python -c 'import sys; print(sys.exec_prefix)')/include/python3.10"
+        export LDFLAGS="-L$(python -c 'import sys; print(sys.exec_prefix)')/lib"
         python -m buildozer -v android debug
 
     - name: Upload APK
